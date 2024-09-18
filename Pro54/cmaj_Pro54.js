@@ -68,8 +68,7 @@ export async function createAudioWorkletNodePatchConnection (audioContext, workl
   await connection.initialise ({ CmajorClass: Pro54,
                                  audioContext,
                                  workletName,
-                                 hostDescription: "WebAudio",
-                                 rootResourcePath: "http://localhost:8000/" });
+                                 hostDescription: "WebAudio" });
   return connection;
 }
 
