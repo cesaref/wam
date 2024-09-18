@@ -68,7 +68,8 @@ export async function createAudioWorkletNodePatchConnection (audioContext, workl
   await connection.initialise ({ CmajorClass: Pro54,
                                  audioContext,
                                  workletName,
-                                 hostDescription: "WebAudio" });
+                                 hostDescription: "WebAudio",
+                                 rootResourcePath: "https://cesaref.github.io/wam/Pro54/" });
   return connection;
 }
 
