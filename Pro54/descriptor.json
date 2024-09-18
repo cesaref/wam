@@ -1,0 +1,16 @@
+{
+    "identifier": "dev.cmajor.pro54",
+    "name": "Pro54",
+    "vendor": "Cmajor Software Ltd",
+    "description": "A faithful Cmajor port of the classic Native Instruments Pro-53 synth",
+    "version": "1.0.0",
+    "apiVersion": "2.0.0",
+    "keywords": ["instrument", "synth", "prophet", "cmajor"],
+    "isInstrument": true,
+    "thumbnail": "screenshot.png",
+    "website": "https://cmajor.dev/",
+    "hasAudioInput": false,
+    "hasAudioOutput": true,
+    "hasMidiInput": true,
+    "hasMidiOutput": false
+}
