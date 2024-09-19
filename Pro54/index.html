@@ -1,14 +1,14 @@
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Simple host that loads a WAM plugin</title>
-</head>
+  <script type="module" src="https://mainline.i3s.unice.fr/wam_wc/wam-host/wamHost.js"> </script>
+  <script type="module" src="https://mainline.i3s.unice.fr/wam_wc/wam-plugin/wamPlugin.js"></script>
+  </head>
+      <wam-host>
+      <wam-plugin
+        id="wamRemote"
+        src="./index.js"
+      ></wam-plugin>
+    </wam-host>
 
-<body>
-    <main>
-        <audio id="player" src="./host/sample.mp3" controls loop crossOrigin="anonymous"></audio>
-        <div id="mount"></div>
-    </main>
-    <script type="module" src="./host/host.js"></script>
 </body>
+</html>

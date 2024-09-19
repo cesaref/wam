@@ -1,5 +1,5 @@
 import { WebAudioModule } from './sdk/index.js';
-import * as patch from "./cmaj_Pro54.js";
+import * as patch from "./cmaj_Electric_Piano.js";
 import { createPatchViewHolder } from "./cmaj_api/cmaj-patch-view.js"
 
 const getBaseUrl = (relativeURL) => {
