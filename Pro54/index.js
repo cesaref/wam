@@ -28,6 +28,10 @@ export default class CmajModule extends WebAudioModule
     {
     };
 
+    this.patchConnection.audioNode.destroyGui = function()
+    {
+    };
+
     this.patchConnection.audioNode.getParameterInfo = function()
     {
       return {};
@@ -48,6 +52,7 @@ export default class CmajModule extends WebAudioModule
       }
     }
 
+    this.module = this.patchConnection.audioNode;
     return this.patchConnection.audioNode;
   }
 
@@ -85,9 +90,5 @@ export default class CmajModule extends WebAudioModule
   createGui()
   {
     return createPatchViewHolder (this.patchConnection);
-  }
-
-  destroyGUI(gui)
-  {
   }
 }
