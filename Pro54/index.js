@@ -24,6 +24,10 @@ export default class CmajModule extends WebAudioModule
     this.patchConnection.audioNode.patchConnection = this.patchConnection;
 
     // Add missing functions to extend the AudioWorklet to meet the WamNode functionality
+    this.patchConnection.audioNode.destroy = function()
+    {
+    };
+
     this.patchConnection.audioNode.getParameterInfo = function()
     {
       return {};
