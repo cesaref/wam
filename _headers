@@ -1,2 +1,3 @@
 /Tremolo/ui/stompbox/*
   Access-Control-Allow-Origin: *
+  Cross-Origin-Resource-Policy: cross-origin
