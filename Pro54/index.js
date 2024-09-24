@@ -52,6 +52,11 @@ export default class CmajModule extends WebAudioModule
     return this.patchConnection.audioNode;
   }
 
+  scheduleEvents (...args)
+  {
+    this.patchConnection.audioNode.scheduleEvents (args);
+  }
+
   async initialize (state)
   {
     const hasPurpose = (endpoints, purpose) =>
