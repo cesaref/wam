@@ -20,15 +20,12 @@ export default class CmajModule extends WebAudioModule
           return i.endpointID;
     }
 
+    this.patchConnection.audioNode.module = this;
     this.patchConnection.audioNode.midiEndpointID = getInputWithPurpose ("midi in");
     this.patchConnection.audioNode.patchConnection = this.patchConnection;
 
     // Add missing functions to extend the AudioWorklet to meet the WamNode functionality
     this.patchConnection.audioNode.destroy = function()
-    {
-    };
-
-    this.patchConnection.audioNode.destroyGui = function()
     {
     };
 
@@ -52,7 +49,6 @@ export default class CmajModule extends WebAudioModule
       }
     }
 
-    this.module = this.patchConnection.audioNode;
     return this.patchConnection.audioNode;
   }
 
@@ -90,5 +86,9 @@ export default class CmajModule extends WebAudioModule
   createGui()
   {
     return createPatchViewHolder (this.patchConnection);
+  }
+
+  destroyGui()
+  {
   }
 }
