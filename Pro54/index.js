@@ -86,4 +86,8 @@ export default class CmajModule extends WebAudioModule
   {
     return createPatchViewHolder (this.patchConnection);
   }
+
+  destroyGUI()
+  {
+  }
 }
