@@ -152,7 +152,7 @@ class PatchViewHolder extends HTMLElement
     }
 }
 
-try { window.customElements.define ("cmaj-patch-view-holder", PatchViewHolder); } catch (err) {}
+window.customElements.define ("cmaj-patch-view-holder", PatchViewHolder);
 
 //==============================================================================
 /** Creates and returns a HTMLElement view which can be shown to control this patch.

@@ -51,8 +51,8 @@ export default class CmajModule extends WebAudioModule
   {
     const node = new CmajNode(this.audioContext);
 
-    this.patchConnection = await patch.createAudioWorkletNodePatchConnection (this.audioContext, "Tremolo");
-        const paramMgrNode = await ParamMgrFactory.create(this, {});
+    this.patchConnection = await patch.createAudioWorkletNodePatchConnection (this.audioContext, "dev.cmajor.examples.tremolo");
+    const paramMgrNode = await ParamMgrFactory.create(this, {});
 
     node.setup (this.patchConnection, paramMgrNode);
 

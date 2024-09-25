@@ -803,10 +803,10 @@ export class LabelledControlHolder  extends ParameterControlBase
     }
 }
 
-try { window.customElements.define ("cmaj-knob-control", Knob); } catch (err) {}
-try { window.customElements.define ("cmaj-switch-control", Switch); } catch (err) {}
-try { window.customElements.define ("cmaj-options-control", Options); } catch (err) {}
-try { window.customElements.define ("cmaj-labelled-control-holder", LabelledControlHolder); } catch (err) {}
+window.customElements.define ("cmaj-knob-control", Knob);
+window.customElements.define ("cmaj-switch-control", Switch);
+window.customElements.define ("cmaj-options-control", Options);
+window.customElements.define ("cmaj-labelled-control-holder", LabelledControlHolder);
 
 //==============================================================================
 /** Fetches all the CSS for the controls defined in this module */
