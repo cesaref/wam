@@ -1,5 +1,5 @@
 import { WebAudioModule } from './sdk/index.js';
-import { CompositeAudioNode, ParamMgrFactory } from './sdk-parammgr/index.js';
+import { CompositeAudioNode, ParamMgrFactory } from './sdk/parammgr.js';
 import * as patch from "./cmaj_Pro54.js";
 import { createPatchViewHolder } from "./cmaj_api/cmaj-patch-view.js"
 
@@ -26,17 +26,20 @@ class CmajNode extends CompositeAudioNode
           return i.endpointID;
     }
 
-    this.midiEndpointID = getInputWithPurpose ("midi in");
+    if (getInputWithPurpose ("audio in"))
+      this.connect (this.patchConnection.audioNode, 0, 0);
 
     this._wamNode = paramManagerNode;
     this._output = this.patchConnection.audioNode;
 
-    if (this.midiEndpointID)
+    const midiEndpointID = getInputWithPurpose ("midi in");
+
+    if (midiEndpointID)
     {
       this._wamNode.addEventListener('wam-midi', ({ detail }) =>
       {
-        console.log(detail);
-        this.patchConnection.sendMIDIInputEvent (this.midiEndpointID, detail.data.bytes[2] | (detail.data.bytes[1] << 8) | (detail.data.bytes[0] << 16));
+//        console.log(detail);
+        this.patchConnection.sendMIDIInputEvent (midiEndpointID, detail.data.bytes[2] | (detail.data.bytes[1] << 8) | (detail.data.bytes[0] << 16));
       });
     }
   }
@@ -44,14 +47,12 @@ class CmajNode extends CompositeAudioNode
 
 export default class CmajModule extends WebAudioModule
 {
-  _baseURL = getBaseUrl (new URL('.', import.meta.url));
-
   async createAudioNode (options)
   {
     const node = new CmajNode(this.audioContext);
 
     this.patchConnection = await patch.createAudioWorkletNodePatchConnection (this.audioContext, "cmaj-processor");
-		const paramMgrNode = await ParamMgrFactory.create(this, {});
+        const paramMgrNode = await ParamMgrFactory.create(this, {});
 
     node.setup (this.patchConnection, paramMgrNode);
 
