@@ -51,7 +51,7 @@ export default class CmajModule extends WebAudioModule
   {
     const node = new CmajNode(this.audioContext);
 
-    this.patchConnection = await patch.createAudioWorkletNodePatchConnection (this.audioContext, "dev.cmajor.examples.GuitarLSTM");
+    this.patchConnection = await patch.createAudioWorkletNodePatchConnection (this.audioContext, "GuitarLSTM");
     const paramMgrNode = await ParamMgrFactory.create(this, {});
 
     node.setup (this.patchConnection, paramMgrNode);
