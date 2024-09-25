@@ -1,4 +1,5 @@
 import { WebAudioModule } from './sdk/index.js';
+import { CompositeAudioNode, ParamMgrFactory } from './sdk-parammgr/index.js';
 import * as patch from "./cmaj_Pro54.js";
 import { createPatchViewHolder } from "./cmaj_api/cmaj-patch-view.js"
 
@@ -7,11 +8,16 @@ const getBaseUrl = (relativeURL) => {
   return baseURL;
 };
 
-export default class CmajModule extends WebAudioModule
+class CmajNode extends CompositeAudioNode
 {
-  async createAudioNode (options)
+  constructor (context, options)
   {
-    this.patchConnection = await patch.createAudioWorkletNodePatchConnection (this.audioContext, "cmaj-processor");
+    super (context, options);
+  }
+
+  setup (patchConnection, paramManagerNode)
+  {
+    this.patchConnection = patchConnection;
 
     const getInputWithPurpose = (purpose) =>
     {
@@ -20,41 +26,36 @@ export default class CmajModule extends WebAudioModule
           return i.endpointID;
     }
 
-    this.patchConnection.audioNode.module = this;
-    this.patchConnection.audioNode.midiEndpointID = getInputWithPurpose ("midi in");
-    this.patchConnection.audioNode.patchConnection = this.patchConnection;
+    this.midiEndpointID = getInputWithPurpose ("midi in");
 
-    // Add missing functions to extend the AudioWorklet to meet the WamNode functionality
-    this.patchConnection.audioNode.destroy = function()
-    {
-    };
+    this._wamNode = paramManagerNode;
+    this._output = this.patchConnection.audioNode;
 
-    this.patchConnection.audioNode.getParameterInfo = function()
+    if (this.midiEndpointID)
     {
-      return {};
-    };
-
-    this.patchConnection.audioNode.scheduleEvents = function (msg)
-    {
-      switch (msg.type)
+      this._wamNode.addEventListener('wam-midi', ({ detail }) =>
       {
-        case "wam-midi":
-          if (this.midiEndpointID)
-            this.patchConnection.sendMIDIInputEvent (this.midiEndpointID, msg.data.bytes[2] | (msg.data.bytes[1] << 8) | (msg.data.bytes[0] << 16));
-          break;
-
-        case "wam-automation":
-          console.log ("received automation message " + JSON.stringify (msg));
-          break;
-      }
+        console.log(detail);
+        this.patchConnection.sendMIDIInputEvent (this.midiEndpointID, detail.data.bytes[2] | (detail.data.bytes[1] << 8) | (detail.data.bytes[0] << 16));
+      });
     }
-
-    return this.patchConnection.audioNode;
   }
+}
 
-  scheduleEvents (...args)
+export default class CmajModule extends WebAudioModule
+{
+  _baseURL = getBaseUrl (new URL('.', import.meta.url));
+
+  async createAudioNode (options)
   {
-    this.patchConnection.audioNode.scheduleEvents (args);
+    const node = new CmajNode(this.audioContext);
+
+    this.patchConnection = await patch.createAudioWorkletNodePatchConnection (this.audioContext, "cmaj-processor");
+		const paramMgrNode = await ParamMgrFactory.create(this, {});
+
+    node.setup (this.patchConnection, paramMgrNode);
+
+    return node;
   }
 
   async initialize (state)
@@ -86,7 +87,7 @@ export default class CmajModule extends WebAudioModule
 
     Object.assign (this.descriptor, descriptor);
     return super.initialize(state);
-    }
+  }
 
   createGui()
   {
