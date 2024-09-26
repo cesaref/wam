@@ -52,7 +52,9 @@ export default class CmajModule extends WebAudioModule
     const node = new CmajNode(this.audioContext);
 
     this.patchConnection = await patch.createAudioWorkletNodePatchConnection (this.audioContext, "Faust__Cmajor_integration_example");
-    const paramMgrNode = await ParamMgrFactory.create(this, {});
+
+    const parameterList = this.buildParameterList();
+    const paramMgrNode = await ParamMgrFactory.create(this, { internalParamsConfig: parameterList } );
 
     node.setup (this.patchConnection, paramMgrNode);
 
@@ -88,6 +90,26 @@ export default class CmajModule extends WebAudioModule
 
     Object.assign (this.descriptor, descriptor);
     return super.initialize(state);
+  }
+
+  buildParameterList()
+  {
+    const paramList = {};
+
+    const inputParameters  = this.patchConnection.inputEndpoints.filter (({ purpose }) => purpose === "parameter");
+
+    inputParameters.forEach ((endpoint) =>
+    {
+      paramList[endpoint.endpointID] =
+      {
+        defaultValue: endpoint.annotation.init,
+        minValue: endpoint.annotation.min,
+        maxValue: endpoint.annotation.max,
+        onChange: (value) => { this.patchConnection.sendEventOrValue (endpoint.endpointID, value); }
+      };
+    });
+
+    return paramList;
   }
 
   createGui()
