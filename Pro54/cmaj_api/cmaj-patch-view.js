@@ -175,5 +175,5 @@ export async function createPatchViewHolder (patchConnection, preferredType)
     const view = await createPatchView (patchConnection, preferredType);
 
     if (view)
-        return new PatchViewHolder (view);
+        return new window.customElements.get ("cmaj-patch-view-holder");
 }
