@@ -1,0 +1,14 @@
+{
+    "name": "Tremolo",
+    "vendor": "Cmajor Software Ltd",
+    "description": "A simple tremolo effect, with a custom GUI",
+    "version": "1.0",
+    "apiVersion": "2.0.0", 
+    "keywords": [ "Cmajor" ],
+    "isInstrument": false,
+    "hasMidiInput": false,
+    "hasMidiOutput": false,
+    "hasAudioInput": true,
+    "hasAudioOutput": true,
+    "website": ""
+}

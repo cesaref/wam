@@ -1,0 +1,14 @@
+{
+    "name": "GuitarLSTM",
+    "vendor": "Cmajor Software Ltd",
+    "description": "A distortion demo using ML inference",
+    "version": "1.0",
+    "apiVersion": "2.0.0", 
+    "keywords": [ "Cmajor" ],
+    "isInstrument": false,
+    "hasMidiInput": false,
+    "hasMidiOutput": false,
+    "hasAudioInput": true,
+    "hasAudioOutput": true,
+    "website": ""
+}

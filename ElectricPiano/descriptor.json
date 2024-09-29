@@ -1,0 +1,14 @@
+{
+    "name": "Electric Piano",
+    "vendor": "Cmajor Software Ltd",
+    "description": "An additive model of an electric piano",
+    "version": "1.0",
+    "apiVersion": "2.0.0", 
+    "keywords": [ "Cmajor" ],
+    "isInstrument": true,
+    "hasMidiInput": true,
+    "hasMidiOutput": false,
+    "hasAudioInput": false,
+    "hasAudioOutput": true,
+    "website": ""
+}
