@@ -34,7 +34,8 @@ export const manifest =
   "icon": "icon.png",
   "plugin": {
     "manufacturerCode": "Cmaj",
-    "pluginCode": "Pr54"
+    "pluginCode": "Pr54",
+    "thumbnail": "thumbnail.png"
   },
   "source": "Pro54.cmajor",
   "worker": "worker/worker.js",

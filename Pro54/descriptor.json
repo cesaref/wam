@@ -4,7 +4,7 @@
     "description": "A faithful Cmajor port of the classic Native Instruments Pro-53 synth",
     "version": "1.0",
     "apiVersion": "2.0.0", 
-    "thumbnail": "icon.png",
+    "thumbnail": "thumbnail.png",
     "keywords": [ "Cmajor" ],
     "isInstrument": true,
     "hasMidiInput": true,
