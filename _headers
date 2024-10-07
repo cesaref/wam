@@ -5,3 +5,7 @@
 /Pro54/gui/assets/*
   Access-Control-Allow-Origin: *
   Cross-Origin-Resource-Policy: cross-origin
+
+/*
+  Access-Control-Allow-Origin: *
+  Cross-Origin-Resource-Policy: cross-origin
