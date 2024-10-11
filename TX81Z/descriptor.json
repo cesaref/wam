@@ -1,0 +1,14 @@
+{
+    "name": "TX81Z",
+    "vendor": "Cmajor Software Ltd",
+    "description": "TX81Z",
+    "version": "1.0",
+    "apiVersion": "2.0.0", 
+    "keywords": [ "Cmajor" ],
+    "isInstrument": true,
+    "hasMidiInput": true,
+    "hasMidiOutput": false,
+    "hasAudioInput": false,
+    "hasAudioOutput": true,
+    "website": ""
+}
