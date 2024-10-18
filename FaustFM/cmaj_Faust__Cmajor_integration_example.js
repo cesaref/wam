@@ -378,11 +378,11 @@ class Synth
   /** @access private */
   async _initialiseInternalSIMD (sessionID, frequency)
   {
-    this.stateAddress = 80464;
-    this.scratchSpaceAddress = 4430864;
+    this.stateAddress = 5257808;
+    this.scratchSpaceAddress = 9608208;
 
-    const memory = new WebAssembly.Memory ({ initial: 69 });
-    const stack = new WebAssembly.Global ({ value: "i32", mutable: true }, 80464);
+    const memory = new WebAssembly.Memory ({ initial: 148 });
+    const stack = new WebAssembly.Global ({ value: "i32", mutable: true }, 5257808);
     const imports = {
       env: {
         __linear_memory: memory,
@@ -406,28 +406,28 @@ class Synth
 
     exports.initialise?.(this.stateAddress, this.scratchSpaceAddress, sessionID, frequency);
 
-    const advanceFn = exports.advanceBlock ? ((numFrames) => exports.advanceBlock (80464, 4426768, numFrames))
-                                           : (() => exports.advanceOneFrame (80464, 4426768));
+    const advanceFn = exports.advanceBlock ? ((numFrames) => exports.advanceBlock (5257808, 9604112, numFrames))
+                                           : (() => exports.advanceOneFrame (5257808, 9604112));
 
     this.reset = () => {
-       byteMemory.fill (0, 80464, 4426768);
-       byteMemory.fill (0, 4430864, 4430864 + 4);
+       byteMemory.fill (0, 5257808, 9604112);
+       byteMemory.fill (0, 9608208, 9608208 + 4);
        exports.initialise?.(this.stateAddress, this.scratchSpaceAddress, sessionID, frequency);
     };
 
     this._advanceInternal = (numFrames) => {
-      byteMemory.fill (0, 4426768, 4426768 + numFrames * 8);
+      byteMemory.fill (0, 9604112, 9604112 + numFrames * 8);
       advanceFn (numFrames);
     };
 
-    this._getOutputFrameInternal_out = (frameIndex) => { return this._unpack_V2_f32 (4426768 + frameIndex * 8); };
+    this._getOutputFrameInternal_out = (frameIndex) => { return this._unpack_V2_f32 (9604112 + frameIndex * 8); };
 
     this._getOutputFramesInternal_out = (destChannelArrays, maxNumFramesToRead, destChannel) => {
       if (maxNumFramesToRead > 512)
         maxNumFramesToRead = 512;
 
       const channelsToCopy = Math.min (2, destChannelArrays.length - destChannel);
-      let source = 4426768;
+      let source = 9604112;
 
       for (let frame = 0; frame < maxNumFramesToRead; ++frame)
       {
@@ -451,11 +451,11 @@ class Synth
   /** @access private */
   async _initialiseInternalNonSIMD (sessionID, frequency)
   {
-    this.stateAddress = 80464;
-    this.scratchSpaceAddress = 4430864;
+    this.stateAddress = 5257808;
+    this.scratchSpaceAddress = 9608208;
 
-    const memory = new WebAssembly.Memory ({ initial: 69 });
-    const stack = new WebAssembly.Global ({ value: "i32", mutable: true }, 80464);
+    const memory = new WebAssembly.Memory ({ initial: 148 });
+    const stack = new WebAssembly.Global ({ value: "i32", mutable: true }, 5257808);
     const imports = {
       env: {
         __linear_memory: memory,
@@ -479,28 +479,28 @@ class Synth
 
     exports.initialise?.(this.stateAddress, this.scratchSpaceAddress, sessionID, frequency);
 
-    const advanceFn = exports.advanceBlock ? ((numFrames) => exports.advanceBlock (80464, 4426768, numFrames))
-                                           : (() => exports.advanceOneFrame (80464, 4426768));
+    const advanceFn = exports.advanceBlock ? ((numFrames) => exports.advanceBlock (5257808, 9604112, numFrames))
+                                           : (() => exports.advanceOneFrame (5257808, 9604112));
 
     this.reset = () => {
-       byteMemory.fill (0, 80464, 4426768);
-       byteMemory.fill (0, 4430864, 4430864 + 4);
+       byteMemory.fill (0, 5257808, 9604112);
+       byteMemory.fill (0, 9608208, 9608208 + 4);
        exports.initialise?.(this.stateAddress, this.scratchSpaceAddress, sessionID, frequency);
     };
 
     this._advanceInternal = (numFrames) => {
-      byteMemory.fill (0, 4426768, 4426768 + numFrames * 8);
+      byteMemory.fill (0, 9604112, 9604112 + numFrames * 8);
       advanceFn (numFrames);
     };
 
-    this._getOutputFrameInternal_out = (frameIndex) => { return this._unpack_V2_f32 (4426768 + frameIndex * 8); };
+    this._getOutputFrameInternal_out = (frameIndex) => { return this._unpack_V2_f32 (9604112 + frameIndex * 8); };
 
     this._getOutputFramesInternal_out = (destChannelArrays, maxNumFramesToRead, destChannel) => {
       if (maxNumFramesToRead > 512)
         maxNumFramesToRead = 512;
 
       const channelsToCopy = Math.min (2, destChannelArrays.length - destChannel);
-      let source = 4426768;
+      let source = 9604112;
 
       for (let frame = 0; frame < maxNumFramesToRead; ++frame)
       {
