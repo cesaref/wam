@@ -43,7 +43,7 @@ class CmajNode extends CompositeAudioNode
     }
   }
 
-	async getState()
+	getState()
   {
     this.patchConnection.requestFullStoredState (msg =>
     {
@@ -55,7 +55,7 @@ class CmajNode extends CompositeAudioNode
 
 	setState(...args)
   {
-		return this._wamNode.setState(...args);
+    this.patchConnection.sendFullStoredState (...args);
 	}
 }
 
