@@ -38,7 +38,6 @@ class CmajNode extends CompositeAudioNode
     {
       this._wamNode.addEventListener('wam-midi', ({ detail }) =>
       {
-//        console.log(detail);
         this.patchConnection.sendMIDIInputEvent (midiEndpointID, detail.data.bytes[2] | (detail.data.bytes[1] << 8) | (detail.data.bytes[0] << 16));
       });
     }
@@ -46,16 +45,15 @@ class CmajNode extends CompositeAudioNode
 
   getState()
   {
-    const state = {};
-
-    state["params"] = super.getState();
-
-    this.patchConnection.requestFullStoredState (msg =>
+    return new Promise ((data) =>
     {
-      state["patchState"] = msg;
+      this.patchConnection.requestFullStoredState (msg => { data (msg); });
     });
+  }
 
-    return state;
+  setState(...args)
+  {
+    this.patchConnection.sendFullStoredState (...args);
   }
 }
 

@@ -43,22 +43,18 @@ class CmajNode extends CompositeAudioNode
     }
   }
 
-	getState()
+  getState()
   {
     return new Promise ((data) =>
     {
-      this.patchConnection.requestFullStoredState (msg =>
-      {
-        console.log ("Received state: " + JSON.stringify (msg));
-        data (msg);
-      });
+      this.patchConnection.requestFullStoredState (msg => { data (msg); });
     });
-	}
+  }
 
-	setState(...args)
+  setState(...args)
   {
     this.patchConnection.sendFullStoredState (...args);
-	}
+  }
 }
 
 export default class CmajModule extends WebAudioModule
