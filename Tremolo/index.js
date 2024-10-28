@@ -45,12 +45,14 @@ class CmajNode extends CompositeAudioNode
 
 	getState()
   {
-    this.patchConnection.requestFullStoredState (msg =>
+    return new Promise ((data) =>
     {
-      console.log ("Received state: " + JSON.stringify (msg));
-      return msg;
-    }
-    );
+      this.patchConnection.requestFullStoredState (msg =>
+      {
+        console.log ("Received state: " + JSON.stringify (msg));
+        return msg;
+      });
+    });
 	}
 
 	setState(...args)
