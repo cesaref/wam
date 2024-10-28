@@ -38,11 +38,20 @@ class CmajNode extends CompositeAudioNode
     {
       this._wamNode.addEventListener('wam-midi', ({ detail }) =>
       {
-//        console.log(detail);
         this.patchConnection.sendMIDIInputEvent (midiEndpointID, detail.data.bytes[2] | (detail.data.bytes[1] << 8) | (detail.data.bytes[0] << 16));
       });
     }
   }
+
+	getState()
+  {
+		return this._wamNode.getState();
+	}
+
+	setState(...args)
+  {
+		return this._wamNode.setState(...args);
+	}
 }
 
 export default class CmajModule extends WebAudioModule
