@@ -50,7 +50,7 @@ class CmajNode extends CompositeAudioNode
       this.patchConnection.requestFullStoredState (msg =>
       {
         console.log ("Received state: " + JSON.stringify (msg));
-        return msg;
+        data (msg);
       });
     });
 	}
