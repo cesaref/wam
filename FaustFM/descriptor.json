@@ -1,4 +1,5 @@
 {
+    "identifier": "com.grame.cmajor.integration",
     "name": "Faust + Cmajor integration example",
     "vendor": "GRAME",
     "description": "Faust DSP and Cmajor patch",

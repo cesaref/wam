@@ -1,4 +1,5 @@
 {
+    "identifier": "dev.cmajor.examples.tremolo",
     "name": "Tremolo",
     "vendor": "Cmajor Software Ltd",
     "description": "A simple tremolo effect, with a custom GUI",
