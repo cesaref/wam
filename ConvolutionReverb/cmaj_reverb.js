@@ -179,7 +179,7 @@ class Convolver
         },
         "annotation": {
           "name": "Dry Level",
-          "min": -24,
+          "min": -48,
           "max": 6,
           "init": 0,
           "unit": "db"
@@ -194,7 +194,7 @@ class Convolver
         },
         "annotation": {
           "name": "Wet Level",
-          "min": -24,
+          "min": -48,
           "max": 6,
           "init": -15,
           "unit": "db"
