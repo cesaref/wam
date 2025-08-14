@@ -20,6 +20,8 @@ https://cesaref.github.io/wam/GuitarLSTM
 
 https://cesaref.github.io/wam/FaustFM
 
+https://cesaref.github.io/wam/FilterEQ
+
 ### WAM links for using with other hosts
 
 https://cesaref.github.io/wam/Pro54/index.js
@@ -29,3 +31,5 @@ https://cesaref.github.io/wam/ElectricPiano/index.js
 https://cesaref.github.io/wam/GuitarLSTM/index.js
 
 https://cesaref.github.io/wam/FaustFM/index.js
+
+https://cesaref.github.io/wam/FilterEQ/index.js
