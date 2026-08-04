@@ -214,6 +214,36 @@ function registerWorkletProcessor (workletName, CmajorClass, hostDescription)
             });
         }
 
+        processParameterUpdate (parametersMap, otherInputEndpointsMap, inputEventListeners, id, value, rampFrames)
+        {
+            const endpointID = id;
+            const parameter = parametersMap[endpointID];
+
+            if (parameter)
+            {
+                const newValue = parameter.snapAndConstrainValue (value);
+                parameter.update (newValue, rampFrames);
+
+                this.sendParameterValueChanged (endpointID, newValue);
+                return;
+            }
+
+            const inputEndpoint = otherInputEndpointsMap[endpointID];
+
+            if (inputEndpoint)
+            {
+                inputEndpoint.update (msg.value);
+
+                for (const { replyType } of inputEventListeners[endpointID] ?? [])
+                {
+                    this.sendPatchMessage ({
+                        type: replyType,
+                        message: inputEndpoint.cachedValue,
+                    });
+                }
+            }
+        }
+
         initialisePatch (wrapper, initialValueOverrides)
         {
             try
@@ -339,32 +369,7 @@ function registerWorkletProcessor (workletName, CmajorClass, hostDescription)
 
                         case "send_value":
                         {
-                            const endpointID = msg.id;
-                            const parameter = parametersMap[endpointID];
-
-                            if (parameter)
-                            {
-                                const newValue = parameter.snapAndConstrainValue (msg.value);
-                                parameter.update (newValue, msg.rampFrames);
-
-                                this.sendParameterValueChanged (endpointID, newValue);
-                                return;
-                            }
-
-                            const inputEndpoint = otherInputEndpointsMap[endpointID];
-
-                            if (inputEndpoint)
-                            {
-                                inputEndpoint.update (msg.value);
-
-                                for (const { replyType } of inputEventListeners[endpointID] ?? [])
-                                {
-                                    this.sendPatchMessage ({
-                                        type: replyType,
-                                        message: inputEndpoint.cachedValue,
-                                    });
-                                }
-                            }
+                            this.processParameterUpdate (parametersMap, otherInputEndpointsMap, inputEventListeners, msg.id, msg.value, msg.rampFrames)
                             break;
                         }
 
