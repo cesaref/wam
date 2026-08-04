@@ -674,7 +674,8 @@ export class AudioWorkletPatchConnection extends PatchConnection
     //==============================================================================
     sendMessageToServer (msg)
     {
-        this.audioNode.port.postMessage ({ type: "patch", payload: msg });
+        this.deliverMessageFromServer (msg)
+        // this.audioNode.port.postMessage ({ type: "patch", payload: msg });
     }
 
     requestStoredStateValue (key)
