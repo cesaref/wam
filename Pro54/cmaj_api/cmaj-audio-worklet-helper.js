@@ -232,7 +232,7 @@ function registerWorkletProcessor (workletName, CmajorClass, hostDescription)
 
             if (inputEndpoint)
             {
-                inputEndpoint.update (msg.value);
+                inputEndpoint.update (value);
 
                 for (const { replyType } of inputEventListeners[endpointID] ?? [])
                 {
